@@ -55,10 +55,10 @@ const router = useRouter();
 const domains = ref([])
 
 const loadData = async () =>{
-        const response = await axios.get(`/api/user_domains/${localStorage.getItem('user_id')}`);
-        console.log(response)
-        domains.value = response.data.data.domains
-      };
+    const response = await axios.get(`/api/user_domains/${localStorage.getItem('user_id')}`);
+    console.log(response)
+    domains.value = response.data.data.domains
+};
 
 
 onMounted(() => {
