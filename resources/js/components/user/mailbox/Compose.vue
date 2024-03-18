@@ -1,10 +1,10 @@
 <template>
-<div class="card card-primary card-outline">
-    <div class="card-header">
+<div class="card card-warning card-outline">
+    <div class="card-header bg-black">
     <h3 class="card-title">Compose New Message</h3>
     </div>
     <!-- /.card-header -->
-    <div class="card-body">
+    <div class="card-body bg-warning">
     <div class="form-group">
         <input class="form-control" placeholder="To:">
     </div>
@@ -69,12 +69,18 @@
     </div>
     </div>
     <!-- /.card-body -->
-    <div class="card-footer">
-    <div class="float-right">
-        <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
-        <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
-    </div>
-    <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
+    <div class="card-footer bg-black">
+        <div class="row">
+            <div class="col-md-8">
+                <button type="reset" class="btn btn-secondary"><i class="fas fa-times"></i> Discard</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-success"><i class="fas fa-pencil-alt"></i> Draft</button>
+            </div>
+            <div class="col-md-2">
+            <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+            </div>
+        </div>
     </div>
     <!-- /.card-footer -->
 </div>

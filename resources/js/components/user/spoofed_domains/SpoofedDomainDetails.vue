@@ -61,7 +61,7 @@ onMounted(() => {
             <p class="m-2">{{spoof_domain.name}}</p>
           </div>
           <div class="col-md-6">
-            <p class="text-danger m-2">{{domain_risk_rating.overall_rating}}</p>
+            <!-- <p class="text-danger m-2">{{domain_risk_rating.overall_rating}}</p> -->
           </div>
         </div>
         <div class="row">

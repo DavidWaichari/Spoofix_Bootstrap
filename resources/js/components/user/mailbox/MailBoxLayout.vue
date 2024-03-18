@@ -51,9 +51,9 @@ const loadInbox = () =>{
       <div class="row">
         <div class="col-md-3">
           <button  v-if="is_composing===false" class="btn btn-warning btn-block mb-3" @click="loadCompose">Compose</button>
-          <button  v-if="is_composing===true" class="btn btn-primary btn-block mb-3" @click="loadInbox">Back to Inbox</button>
+          <button  v-if="is_composing===true" class="btn btn-warning btn-block mb-3" @click="loadInbox">Back to Inbox</button>
           <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-black">
               <h3 class="card-title">Folders</h3>
 
               <div class="card-tools">
@@ -62,7 +62,7 @@ const loadInbox = () =>{
                 </button>
               </div>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-0 bg-warning">
               <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
                   <a href="#" class="nav-link">
@@ -97,7 +97,7 @@ const loadInbox = () =>{
           </div>
           <!-- /.card -->
           <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-black">
               <h3 class="card-title">Labels</h3>
 
               <div class="card-tools">
@@ -106,7 +106,7 @@ const loadInbox = () =>{
                 </button>
               </div>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-0 bg-warning">
               <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
                   <a href="#" class="nav-link">

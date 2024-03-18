@@ -3,15 +3,15 @@ import { RouterLink } from 'vue-router';
 
 import { RouterLink } from 'vue-router';
 <template>
-<div class="card card-primary card-outline">
-            <div class="card-header">
+<div class="card card-warning card-outline">
+            <div class="card-header bg-black">
               <h3 class="card-title">Inbox</h3>
 
               <div class="card-tools">
                 <div class="input-group input-group-sm">
                   <input type="text" class="form-control" placeholder="Search Mail">
                   <div class="input-group-append">
-                    <div class="btn btn-primary">
+                    <div class="btn btn-warning">
                       <i class="fas fa-search"></i>
                     </div>
                   </div>
@@ -20,7 +20,7 @@ import { RouterLink } from 'vue-router';
               <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->
-            <div class="card-body p-0">
+            <div class="card-body p-0 bg-warning">
               <div class="mailbox-controls">
                 <!-- Check all button -->
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
@@ -72,7 +72,7 @@ import { RouterLink } from 'vue-router';
                     <td class="mailbox-date">5 mins ago</td>
                     <td class="mailbox-date">
                         <RouterLink to="/user/mailbox/inbox/1/read">
-                        <button class="btn btn-info btn-sm rounded-button">View</button>
+                        <button class="btn btn-warning btn-sm rounded-button">View</button>
                         </RouterLink>
                     </td>
                   </tr>

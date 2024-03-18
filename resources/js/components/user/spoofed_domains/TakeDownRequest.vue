@@ -32,13 +32,13 @@
           <div class="row">
           <div class="col-md-6">
             <div class="card card-info">
-              <div class="card-header">
+              <div class="card-header bg-black">
                 <h3 class="card-title">Take Down Form</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form class="form-horizontal">
-                <div class="card-body">
+                <div class="card-body bg-yellow">
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-4 col-form-label">Domain Name *</label>
                     <div class="col-sm-8">
@@ -99,8 +99,8 @@
                   </div>
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-default rounded-button">Cancel</button>
+                <div class="card-footer bg-black">
+                  <button type="submit" class="btn btn-primary rounded-button">Cancel</button>
                   <button type="submit" class="btn btn-warning rounded-button float-right">Submit</button>
                 </div>
                 <!-- /.card-footer -->
@@ -109,14 +109,14 @@
           </div>
           <div class="col-md-6">
             <div class="card card-default">
-              <div class="card-header">
+              <div class="card-header bg-black">
                 <h3 class="card-title">
-                  <i class="fas fa-bullhorn"></i>
+                  <i class="fas fa-bullhorn color-white"></i>
                   Details
                 </h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body bg-warning">
                 <div class="callout callout-success">
                   <h5>I am a success callout!</h5>
 
