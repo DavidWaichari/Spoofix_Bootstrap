@@ -186,7 +186,7 @@
   
   <style scoped>
   .active-nav-link {
-    color: yellow !important;
+    color: rgb(255,193,7) !important;
     font-weight: bold !important;
   }
   </style>
