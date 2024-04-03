@@ -107,7 +107,7 @@ onMounted(() => {
                     IP Address
                 </p>
                 <p class="w-100 m-1">
-                  {{domain_scan_details.ip_adress}}
+                  {{domain_scan_details.ip_address}}
                 </p>
               </div>
             </div>

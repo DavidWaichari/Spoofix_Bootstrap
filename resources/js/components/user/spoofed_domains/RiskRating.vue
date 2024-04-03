@@ -32,6 +32,16 @@ onMounted(() => {
             <div class="card" style="background-color: #fffae6;">
               <div class="card-header">
                 <p class="w-100 m-1">
+                  Overall Rating
+                </p>
+                <p class="w-100 m-1">     
+                  {{domain_risk_rating.overall_rating}}
+                </p>
+              </div>
+            </div>
+            <div class="card" style="background-color: #fffae6;">
+              <div class="card-header">
+                <p class="w-100 m-1">
                   Webflow Rating
                 </p>
                 <p class="w-100 m-1">     

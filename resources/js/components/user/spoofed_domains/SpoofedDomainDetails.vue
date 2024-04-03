@@ -61,7 +61,7 @@ onMounted(() => {
             <p class="m-2">{{spoof_domain.name}}</p>
           </div>
           <div class="col-md-6">
-            <!-- <p class="text-danger m-2">{{domain_risk_rating.overall_rating}}</p> -->
+            <p class="text-danger m-2">{{domain_risk_rating.overall_rating}}</p>
           </div>
         </div>
         <div class="row">
@@ -69,9 +69,9 @@ onMounted(() => {
             <div class="card" style="background-color: #fef9c3;">
               <div class="card-header">
                 <h4 class="card-title w-100 m-1">
-                    Domain Details
+                    Scan Details
                 </h4>
-                <RouterLink :to="`/user/domains/${domain_id}/spoofed_domains/${spoof_domain_id}/details/domain_details`">
+                <RouterLink :to="`/user/domains/${domain_id}/spoofed_domains/${spoof_domain_id}/details/scan_details`">
                   <button type="button" class="btn btn-warning ml-2 rounded-button " style="height: 100%; font-size: 12px;">
                     Details
                   </button>
@@ -81,9 +81,9 @@ onMounted(() => {
             <div class="card" style="background-color: #fef9c3;">
               <div class="card-header">
                 <h4 class="card-title w-100 m-1">
-                    Scan Details
+                    Domain Details
                 </h4>
-                <RouterLink :to="`/user/domains/${domain_id}/spoofed_domains/${spoof_domain_id}/details/scan_details`">
+                <RouterLink :to="`/user/domains/${domain_id}/spoofed_domains/${spoof_domain_id}/details/domain_details`">
                   <button type="button" class="btn btn-warning ml-2 rounded-button " style="height: 100%; font-size: 12px;">
                     Details
                   </button>
