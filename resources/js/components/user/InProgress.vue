@@ -57,20 +57,20 @@
 
 
       const headers: Header[] = [
-        { text: "My domain", value: "name", sortable: true },
-        { text: "Domain reported", value: "status" , sortable: true },
-        { text: "Abuse type", value: "is_registered" , sortable: true },
-        { text: "Notes", value: "spoof_status" , sortable: true },
-        { text: "Carbon copy(cc)", value: "current_scan_status" , sortable: true },
-        { text: "Status", value: "progress_status", sortable: true },
+        { text: "My domain", value: "domain.name", sortable: true },
+        { text: "Domain reported", value: "spoof_domain.name" , sortable: true },
+        { text: "Abuse type", value: "abuse_type" , sortable: true },
+        { text: "Notes", value: "notes" , sortable: true },
+        { text: "Carbon copy(cc)", value: "carbon_copy" , sortable: true },
+        { text: "Status", value: "status", sortable: true },
         { text: "Attachments", value: "operation"},
       ];
       const items: Item[] = ref([]);
       const loading = ref(true);
       
       const loadData = async () =>{
-        const response = await axios.get(`/api/domains_spoofed_domains/1`);
-        items.value = response.data.data.spoofed_domains;
+        const response = await axios.get(`/api/user_report_forms`);
+        items.value = response.data.data.user_report_forms;
         loading.value = false;
         // console.log(response)
       };
