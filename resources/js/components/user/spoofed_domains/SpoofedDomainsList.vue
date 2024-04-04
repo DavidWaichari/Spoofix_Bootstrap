@@ -27,7 +27,9 @@
           :headers="headers"
           :items="items"
           :loading="loading"
-          theme-color="#ffc107"
+          :theme-color="'#42b883'"
+          :rows-items="[10, 25, 50,100,500,1000]"
+          :rows-per-page="5"
           table-class-name="customize-table"
         >
           <template #loading>

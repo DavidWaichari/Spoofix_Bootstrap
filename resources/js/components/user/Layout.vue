@@ -102,7 +102,7 @@
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <div class="text-center m-0">
-          <span class="d-block mx-auto text-warning font-weight-bold" style="font-size: 40px;">Spoo<span style="color: white;">fix</span></span>
+          <span class="d-block mx-auto text-warning font-weight-bold" style="font-size: 40px; ">Spoo<span style="color: white;">fix</span></span>
         </div>     <!-- Sidebar -->
         <div class="sidebar mt-1">
           <!-- Sidebar Menu -->
