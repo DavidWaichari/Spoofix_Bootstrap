@@ -36,8 +36,9 @@
           </template>
           <template #item-operation="item">
             <div class="operation-wrapper">
-              <button type="button" class="btn btn-block btn-outline-warning btn-md rounded-button" @click="viewDomain(item)">View</button>
-              <!-- <button class="btn btn-warning btn-rounded" @click="viewDomain(item)">View</button> -->
+              <button type="button" class="btn btn-block btn-outline-warning btn-md rounded-button" @click="downloadAttachments(item)" v-if="item.has_attachments">Download</button>
+              <p  v-else>Unavailable</p>
+              <!-- <button class="btn btn-warning btn-rounded" @click="downloadAttachments(item)">View</button> -->
             </div>
           </template>
         </EasyDataTable>
@@ -79,8 +80,25 @@
        loadData()
     });
 
-      const viewDomain = (item) => {
-        router.push(`/user/domains/${route.params.id}/spoofed_domains/${item.id}/details/scan_details`)
+      const downloadAttachments = async (item) => {
+        try {
+        const response = await axios.get(`/api/download_report_form_attachment/${item.id}`, {
+            responseType: 'blob', // Set response type to blob
+        });
+
+          // Create a blob URL for the file
+          const blob = new Blob([response.data]);
+
+          // Create a link element to trigger the download
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = 'reportform.zip'; // Specify the download filename
+          link.click();
+
+          } catch (error) {
+              console.error('Error downloading attachments:', error);
+              // Handle error if needed
+          }
       };
   </script>
   
