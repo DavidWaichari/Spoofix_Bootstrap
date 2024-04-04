@@ -15,7 +15,7 @@
                 <img :src="'/admin-site/dist/img/user2-160x160.jpg'" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                David [USER]
+                {{user.name}} [USER]
               </div>
               </div>
             </a>
@@ -175,10 +175,13 @@
   
   <script setup>
   import { RouterLink } from 'vue-router';
-  import { ref } from 'vue';
+  import { ref ,onMounted} from 'vue';
+  
+
   
   const isDropdownOpen = ref(false);
-  
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const toggleDropdown = () => {
     isDropdownOpen.value = !isDropdownOpen.value;
   };

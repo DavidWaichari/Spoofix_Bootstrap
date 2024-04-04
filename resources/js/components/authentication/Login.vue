@@ -83,23 +83,24 @@ export default{
     },
     methods:{
         async login(){
-            try {
-                const response = await axios.post('/api/auth/login', this.form);
-                
-                // Extract the token from the response
-                const token = response.data.data.token;
-                const user = response.data.data.user
+          try {
+          const response = await axios.post('/api/auth/login', this.form);
+          
+          // Extract the token and user from the response
+          const token = response.data.data.token;
+          const user = response.data.data.user;
 
-                // Save the token to local storage
-                localStorage.setItem('token', token);
-                localStorage.setItem('user', user);
-                localStorage.setItem('user_id', user.id);
-                // Redirect or perform other actions after successful login
-                this.$router.push('/user/dashboard');
-            } catch (error) {
-                console.error('Login failed:', error.response.data.message);
-                this.error = error.response.data.message
-             }
+          // Save the token and user to local storage
+          localStorage.setItem('token', token);
+          localStorage.setItem('user', JSON.stringify(user)); // Serialize user object to JSON string
+          localStorage.setItem('user_id', user.id);
+          
+          // Redirect or perform other actions after successful login
+          this.$router.push('/user/dashboard');
+          } catch (error) {
+              console.error('Login failed:', error.response.data.message);
+              this.error = error.response.data.message;
+          }
         }
     }
 }
