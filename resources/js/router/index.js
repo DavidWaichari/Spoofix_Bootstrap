@@ -31,6 +31,8 @@ import TakeDownRequest from '../components/user/spoofed_domains/TakeDownRequest.
 // Admin Routes
 import AdminLayout from '../components/admin/Layout.vue';
 import AdminDashboard from '../components/admin/Dashboard.vue';
+import TakeDownRequests from '../components/admin/spoofed_domains/TakeDownRequests.vue';
+
 
 
 
@@ -185,6 +187,11 @@ const routes = [
           path: 'dashboard',
           name: 'AdminDashboard',
           component: AdminDashboard,
+        },
+        {
+          path: 'take_down_requests',
+          name: 'TakeDownRequests',
+          component: TakeDownRequests,
         },
         
       ],

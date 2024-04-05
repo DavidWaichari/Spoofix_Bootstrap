@@ -15,7 +15,7 @@
                 <img :src="'/admin-site/dist/img/user2-160x160.jpg'" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                David [USER]
+                {{user.name}} [Admin] 
               </div>
               </div>
             </a>
@@ -115,6 +115,12 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
+                <RouterLink to="/admin/take_down_requests" class="nav-link" active-class="active-nav-link">
+                  <i class="nav-icon fas fa-list"></i>
+                  <p class="text-lg">Requests</p>
+                </RouterLink>
+              </li>
+              <li class="nav-item">
                 <RouterLink to="/user/domains" class="nav-link" active-class="active-nav-link">
                   <i class="nav-icon fas fa-users"></i>
                   <p class="text-lg">Users</p>
@@ -178,7 +184,8 @@
   import { ref } from 'vue';
   
   const isDropdownOpen = ref(false);
-  
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const toggleDropdown = () => {
     isDropdownOpen.value = !isDropdownOpen.value;
   };
