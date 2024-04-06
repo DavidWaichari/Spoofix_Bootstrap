@@ -32,6 +32,8 @@ import TakeDownRequest from '../components/user/spoofed_domains/TakeDownRequest.
 import AdminLayout from '../components/admin/Layout.vue';
 import AdminDashboard from '../components/admin/Dashboard.vue';
 import TakeDownRequests from '../components/admin/spoofed_domains/TakeDownRequests.vue';
+import ReportDomain from '../components/admin/spoofed_domains/ReportDomain.vue';
+import AdminCompleted from '../components/admin/Completed.vue';
 
 
 
@@ -39,33 +41,27 @@ import TakeDownRequests from '../components/admin/spoofed_domains/TakeDownReques
 const routes = [
   {
     path: '/login',
-    name: 'Login',
     component: Login,
   },
   {
     path: '/register',
-    name: 'Register',
     component: Register,
   },
   // these are the user routes
   {
     path: '/user',
-    name: 'UserLayout',
     component: UserLayout,
     children: [
         {
           path: '',
-          name:'UserHome',
           redirect: '/user/dashboard',
         },
         {
           path: 'dashboard',
-          name: 'UserDashboard',
           component: UserDashboard,
         },
         {
           path: 'domains',
-          name: 'UserDomainsLayout',
           component: UserDomainsLayout,
           children:[
             {
@@ -75,91 +71,74 @@ const routes = [
             },
             {
               path: ':id/spoofed_domains',
-              name: 'SpoofedDomains',
               component: SpoofedDomains,
             },
             {
               path: ':id/spoofed_domains/:spoof_id/details',
-              name: 'SpoofedDomainDetails',
               component: SpoofedDomainDetails,
               children:[
                 {
                   path:'scan_details',
-                  name:'ScanDetails',
                   component: ScanDetails
                 },
                 {
                   path:'page_statistics',
-                  name:'PageStatistics',
                   component: PageStatistics
                 },
                 {
                   path:'domain_details',
-                  name:'DomainDetails',
                   component: DomainDetails
                 },
                 {
                   path:'location',
-                  name:'DomainLocation',
                   component: DomainLocation
                 },
                 {
                   path:'screenshot',
-                  name:'DomainScreenshot',
                   component: DomainScreenshot
                 },
                 {
                   path:'http_redirects',
-                  name:'HttpRedirects',
                   component: HttpRedirects
                 },
                 {
                   path:'risk_rating',
-                  name:'RiskRating',
                   component: RiskRating
                 }
               ]
             },
             {
               path: ':id/spoofed_domains/:spoof_id/take_down_request',
-              name: 'TakeDownRequest',
               component: TakeDownRequest,
             },
           ]
         },
         {
           path: 'in_progress',
-          name: 'InProgress',
           component: InProgress,
         },
         {
           path: 'completed',
-          name: 'Completed',
           component: Completed,
         },
         {
           path: 'mailbox',
-          name: 'MailBoxLayout',
           component: MailBoxLayout,
           children:[
             {
               path: '',
-              name:'Mailbox',
               redirect: '/user/mailbox/inbox',
             },
             {
               path:'inbox',
-              name:'Inbox',
               component: Inbox
             },
             {
               path:'compose',
-              name:'Compose',
               component: Compose
             },
             {
               path:'inbox/:id/read',
-              name:'ReadMail',
               component: ReadMail
             },
           ]
@@ -167,7 +146,6 @@ const routes = [
         },
         {
           path: 'report_form',
-          name: 'ReportForm',
           component: TakeDownRequest,
         },
       ],
@@ -175,23 +153,27 @@ const routes = [
   // Admin Routes
   {
     path: '/admin',
-    name: 'AdminLayout',
     component: AdminLayout,
     children: [
         {
           path: '',
-          name:'AdminHome',
           redirect: '/admin/dashboard',
         },
         {
           path: 'dashboard',
-          name: 'AdminDashboard',
           component: AdminDashboard,
         },
         {
           path: 'take_down_requests',
-          name: 'TakeDownRequests',
           component: TakeDownRequests,
+        },
+        {
+          path: 'completed',
+          component: AdminCompleted,
+        },
+        {
+          path: 'report_form',
+          component: ReportDomain,
         },
         
       ],

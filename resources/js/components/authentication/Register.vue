@@ -122,8 +122,7 @@ export default{
 
                 // Save the token to local storage
                 localStorage.setItem('token', token);
-                localStorage.setItem('user', user);
-                // Redirect or perform other actions after successful register
+                localStorage.setItem('user', JSON.stringify(user));                 // Redirect or perform other actions after successful register
                 this.$router.push('/user/dashboard');
             } catch (error) {
                 console.error('register failed:', error.response.data.errors);

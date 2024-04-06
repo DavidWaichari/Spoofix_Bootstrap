@@ -70,7 +70,7 @@
       const loading = ref(true);
       
       const loadData = async () =>{
-        const response = await axios.get(`/api/user_report_forms`);
+        const response = await axios.get(`/api/report_forms/user`);
         items.value = response.data.data.user_report_forms;
         loading.value = false;
         // console.log(response)

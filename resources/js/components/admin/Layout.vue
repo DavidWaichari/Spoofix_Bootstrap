@@ -121,9 +121,9 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink to="/user/domains" class="nav-link" active-class="active-nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p class="text-lg">Users</p>
+                <RouterLink to="/admin/report_form" class="nav-link" active-class="active-nav-link">
+                  <i class="nav-icon fas fa-bullhorn"></i>
+                  <p class="text-lg">Report Form</p>
                 </RouterLink>
               </li>
               <li class="nav-item">
@@ -139,7 +139,7 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink to="/user/completed" class="nav-link" active-class="active-nav-link">
+                <RouterLink to="/admin/completed" class="nav-link" active-class="active-nav-link">
                   <i class="nav-icon fas fa-check"></i>
                   <p class="text-lg">Completed</p>
                 </RouterLink>
@@ -148,6 +148,12 @@
                 <RouterLink to="/user/mailbox" class="nav-link" active-class="active-nav-link">
                   <i class="nav-icon fas fa-envelope"></i>
                   <p class="text-lg">MailBox</p>
+                </RouterLink>
+              </li>
+              <li class="nav-item">
+                <RouterLink to="/user/domains" class="nav-link" active-class="active-nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p class="text-lg">Users</p>
                 </RouterLink>
               </li>
             </ul>

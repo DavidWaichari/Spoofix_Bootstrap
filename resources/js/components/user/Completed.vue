@@ -36,8 +36,14 @@
           </template>
           <template #item-operation="item">
             <div class="operation-wrapper">
-              <button type="button" class="btn btn-block btn-outline-warning btn-md rounded-button" @click="viewDomain(item)">View</button>
-              <!-- <button class="btn btn-warning btn-rounded" @click="viewDomain(item)">View</button> -->
+              <button type="button" class="btn btn-sm  btn-outline-warning  rounded-button" @click="downloadAttachments(item)" v-if="item.has_attachments">Download</button>
+              <p  v-else>Unavailable</p>
+            </div>
+          </template>
+          <template #item-action="item">
+            <div class="action-wrapper">
+              <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" @click="markSafe(item)" >Mark Safe</button>
+              <button type="button" class="btn btn-sm btn-outline-danger  rounded-button" @click="downloadAttachments(item)" >Report</button>
             </div>
           </template>
         </EasyDataTable>
@@ -57,20 +63,21 @@
 
 
       const headers: Header[] = [
-        { text: "Name", value: "name", sortable: true },
-        { text: "Status", value: "status" , sortable: true },
-        { text: "Registered", value: "is_registered" , sortable: true },
-        { text: "Spoof Status", value: "spoof_status" , sortable: true },
-        { text: "Scan Status", value: "current_scan_status" , sortable: true },
-        { text: "Progress Status", value: "progress_status", sortable: true },
-        { text: "Operation", value: "operation"},
+        { text: "My domain", value: "domain.name", sortable: true },
+        { text: "Domain reported", value: "spoof_domain.name" , sortable: true },
+        { text: "Abuse type", value: "abuse_type" , sortable: true },
+        { text: "Notes", value: "notes" , sortable: true },
+        { text: "Carbon copy(cc)", value: "carbon_copy" , sortable: true },
+        { text: "Status", value: "status", sortable: true },
+        { text: "Attachments", value: "operation"},
+        { text: "Action", value: "action"},
       ];
       const items: Item[] = ref([]);
       const loading = ref(true);
       
       const loadData = async () =>{
-        const response = await axios.get(`/api/domains_spoofed_domains/1`);
-        items.value = response.data.data.spoofed_domains;
+        const response = await axios.get(`/api/report_forms/user_completed`);
+        items.value = response.data.data.user_completed_report_forms;
         loading.value = false;
         // console.log(response)
       };
@@ -79,8 +86,29 @@
        loadData()
     });
 
-      const viewDomain = (item) => {
-        router.push(`/user/domains/${route.params.id}/spoofed_domains/${item.id}/details/scan_details`)
+    const markSafe = async (item) =>{
+      await axios.post(`/api/report_forms/${item.id}/mark_safe`);
+      loadData();
+    }
+      const downloadAttachments = async (item) => {
+        try {
+        const response = await axios.get(`/api/download_report_form_attachment/${item.id}`, {
+            responseType: 'blob', // Set response type to blob
+        });
+
+          // Create a blob URL for the file
+          const blob = new Blob([response.data]);
+
+          // Create a link element to trigger the download
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = 'reportform.zip'; // Specify the download filename
+          link.click();
+
+          } catch (error) {
+              console.error('Error downloading attachments:', error);
+              // Handle error if needed
+          }
       };
   </script>
   
