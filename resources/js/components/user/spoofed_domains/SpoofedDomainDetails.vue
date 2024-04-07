@@ -211,7 +211,7 @@ onMounted(() => {
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div>
+    </div>
   </div>
 </template>
 <style scoped>
