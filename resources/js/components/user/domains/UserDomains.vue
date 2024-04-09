@@ -4,10 +4,16 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <h1 class="m-0">Domains</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
+          </div>
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-warning ml-2 rounded-button float-right" style="height: 100%; font-size: 12px;" @click.prevent="showModal">
+               Add Domain
+            </button>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-4">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Domains</li>
@@ -41,32 +47,64 @@
             </div> 
       </div>
     </section>
+    <!-- Modal -->
+    <div class="modal" id="modal-warning" style="display: block;" v-if="show_modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form  @submit.prevent="addDomain">
+            <div class="modal-header bg-black">
+              <h4 class="modal-title text-warning">Add Domain</h4>
+              <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="form-control" placeholder="Enter valid domain" name="name" v-model="form.name" required>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn  btn-warning rounded-button" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-warning rounded-button" data-dismiss="modal">Submit</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
     <!-- /.content -->
   </div>
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
-const domains = ref([])
-
-const loadData = async () =>{
-    const response = await axios.get(`/api/user_domains/${localStorage.getItem('user_id')}`);
-    domains.value = response.data.data.domains
-};
-
-
-onMounted(() => {
-  loadData()
+const show_modal = ref(false)
+const domains = ref([]);
+const form = ref({
+  name: ''
 });
 
+const loadData = async () => {
+  const response = await axios.get(`/api/user_domains/${localStorage.getItem('user_id')}`);
+  domains.value = response.data.data.domains;
+};
 
+const addDomain = () => {
+  console.log('called');
+  show_modal.value = false
+  form.name = ''
+};
+const showModal = () =>{
+  show_modal.value = true
+}
+onMounted(() => {
+  loadData();
+});
 </script>
-
 
 <style>
 .rounded-button {
