@@ -93,8 +93,9 @@ const loadData = async () => {
   domains.value = response.data.data.domains;
 };
 
-const addDomain = () => {
-  console.log('called');
+const addDomain = async() => {
+  await axios.post(`/api/domains`, form.value);
+  loadData();
   show_modal.value = false
   form.name = ''
 };
