@@ -98,7 +98,7 @@
   <div class="modal" id="modal-warning" style="display: block;" v-if="show_modal">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form  @submit.prevent="addDomain">
+          <form  @submit.prevent="reportDomain('Form')">
             <div class="modal-header bg-black">
               <h4 class="modal-title text-warning">Confirm reporting</h4>
               <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
@@ -184,8 +184,13 @@ const closeModal = () =>{
   show_modal.value = false;
 };
 
-const addDomain = async() => {
-  await axios.post(`/api/domains`, form.value);
+const reportDomain = async(mode) => {
+  await axios.post(`/api/domain_reports`, {
+    'reporting_org_id': reporting_organization.value.id,
+    'report_form_id' : report_form.value.id,
+    'reporting_mode': mode, //either Form or Email
+  });
+
   loadData();
   show_modal.value = false
   form.value.name = ''

@@ -117,7 +117,7 @@
               <li class="nav-item">
                 <RouterLink to="/admin/take_down_requests" class="nav-link" active-class="active-nav-link">
                   <i class="nav-icon fas fa-list"></i>
-                  <p class="text-lg">Requests</p>
+                  <p class="text-lg">Report Forms</p>
                 </RouterLink>
               </li>
               <li class="nav-item">
