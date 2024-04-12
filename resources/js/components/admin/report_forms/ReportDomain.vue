@@ -33,7 +33,10 @@
             <div class="row">
               <div class="col-5 col-sm-3 bg-warning p-2">
                 <div class="nav flex-column nav-tabs h-100"   aria-orientation="vertical">
-                  <button style="text-align: left" :class="organization.id === 1 ? 'nav-link  btn-btn-primary': 'nav-link btn-btn-primary'" v-for="organization in reporting_organizations" @click="selectOrganization(organization)">{{organization.name}}</button>
+                  <button v-for="organization in reporting_organizations" style="text-align: left; display: flex; justify-content: space-between;" :class="organization.id === 1 ? 'nav-link  btn-btn-primary': 'nav-link btn-btn-primary'"  @click="selectOrganization(organization)">
+                    <span>{{organization.name}}</span>
+                    <span class="text-success" v-if="reportOrgExistsInDomainReports(organization.id, domain_reports)">Reported</span>
+                  </button>
                 </div> 
               </div>
               <div class="col-7 col-sm-9">
@@ -137,6 +140,7 @@ const org_id = ref(route.params.org_id);
 const reporting_organizations = ref([]);
 const copyStatus = ref(false); // Variable to track copy status
 const show_modal = ref(false)
+const domain_reports = ref([]);
 
 
 // Function to load data
@@ -150,6 +154,7 @@ const loadData = async () => {
     domain.value = response.data.data.report_form.domain;
     report_form.value = response.data.data.report_form;
     spoof_domain.value = response.data.data.report_form.spoof_domain;
+    domain_reports.value = response.data.data.report_form.domain_reports;
 
     // Fetch reporting organization data
     const reportorgres = await axios.get(`/api/reporting_organizations/1`);
@@ -199,4 +204,17 @@ const reportDomain = async(mode) => {
 onMounted(() => {
   loadData();
 });
+
+
+// Function to check if a specific ID exists in the array of objects
+function reportOrgExistsInDomainReports(id, dataArray) {
+  // Using Array.some() method
+  return dataArray.some(item => item.reporting_org_id === id);
+}
+
+// // Check if ID 2 exists in the array
+// const idExists = isIdExists(2, data);
+// console.log(idExists); // Output: true
+
+
 </script>
