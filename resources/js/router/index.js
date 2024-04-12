@@ -32,7 +32,7 @@ import TakeDownRequest from '../components/user/spoofed_domains/TakeDownRequest.
 import AdminLayout from '../components/admin/Layout.vue';
 import AdminDashboard from '../components/admin/Dashboard.vue';
 import TakeDownRequests from '../components/admin/spoofed_domains/TakeDownRequests.vue';
-import ReportDomainLayout from '../components/admin/report_forms/ReportDomainLayout.vue';
+import ReportDomain from '../components/admin/report_forms/ReportDomain.vue';
 import AdminCompleted from '../components/admin/Completed.vue';
 
 
@@ -172,8 +172,8 @@ const routes = [
           component: AdminCompleted,
         },
         {
-          path: 'report_form',
-          component: ReportDomainLayout,
+          path: 'report_form/:report_id',
+          component: ReportDomain,
         },
         
       ],

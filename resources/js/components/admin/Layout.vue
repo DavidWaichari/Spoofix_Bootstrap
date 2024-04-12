@@ -121,12 +121,6 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink to="/admin/report_form" class="nav-link" active-class="active-nav-link">
-                  <i class="nav-icon fas fa-bullhorn"></i>
-                  <p class="text-lg">Report Form</p>
-                </RouterLink>
-              </li>
-              <li class="nav-item">
                 <RouterLink to="/user/domains" class="nav-link" active-class="active-nav-link">
                   <i class="nav-icon fas fa-list"></i>
                   <p class="text-lg">Domains</p>

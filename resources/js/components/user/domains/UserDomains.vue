@@ -55,15 +55,15 @@
             <div class="modal-header bg-black">
               <h4 class="modal-title text-warning">Add Domain</h4>
               <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
+                <span aria-hidden="true" @click="closeModal">×</span>
               </button>
             </div>
             <div class="modal-body">
               <input type="text" class="form-control" placeholder="Enter valid domain" name="name" v-model="form.name" required>
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn  btn-warning rounded-button" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-warning rounded-button" data-dismiss="modal">Submit</button>
+              <button type="button" class="btn  btn-warning rounded-button" @click="closeModal">Close</button>
+              <button type="submit" class="btn btn-warning rounded-button" >Submit</button>
             </div>
           </form>
         </div>
@@ -97,11 +97,16 @@ const addDomain = async() => {
   await axios.post(`/api/domains`, form.value);
   loadData();
   show_modal.value = false
-  form.name = ''
+  form.value.name = ''
 };
 const showModal = () =>{
-  show_modal.value = true
-}
+  show_modal.value = true;
+};
+
+const closeModal = () =>{
+  show_modal.value = false;
+};
+
 onMounted(() => {
   loadData();
 });

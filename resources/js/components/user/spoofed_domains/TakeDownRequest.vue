@@ -153,7 +153,7 @@ onMounted(async () => {
 });
 
 const loadSpoofDomains = async () => {
-  const response = await axios.get(`/api/domains_spoofed_domains/${form.value.domain_id}`);
+  const response = await axios.get(`/api/domains/${form.value.domain_id}/spoofed_domains`);
   spoof_domains.value = response.data.data.spoofed_domains;
 };
 

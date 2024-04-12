@@ -43,7 +43,7 @@
           <template #item-action="item">
             <div class="action-wrapper">
               <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" @click="markSafe(item)" >Mark Safe</button>
-              <button type="button" class="btn btn-sm btn-outline-danger  rounded-button" @click="downloadAttachments(item)" >Report</button>
+              <button type="button" class="btn btn-sm btn-outline-danger  rounded-button" @click="reportDomain(item)" >Report</button>
             </div>
           </template>
         </EasyDataTable>
@@ -89,6 +89,10 @@
     const markSafe = async (item) =>{
       await axios.post(`/api/report_forms/${item.id}/mark_safe`);
       loadData();
+    }
+
+    const reportDomain = (item) =>{
+      router.push(`report_form/${item.id}`)
     }
       const downloadAttachments = async (item) => {
         try {
