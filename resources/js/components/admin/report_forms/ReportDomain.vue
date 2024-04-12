@@ -75,7 +75,7 @@
                             
                             I would like to report the website {{ spoof_domain.name }} as a {{report_form.abuse_type}} site. This website is attempting to deceive users by imitating legitimate websites and may pose a threat to their security and privacy. Please investigate and take appropriate action.
                           </div>
-                          <button class="btn btn-warning rounded-button" @click.prevent="showModal"> Confirm Report</button>
+                          <button class="btn btn-warning rounded-button" @click.prevent="showModal" v-if="reporting_organization.form_url"> Confirm Report</button>
                         </div>
                         <div class="tab-pane fade active show" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
                           email template area
