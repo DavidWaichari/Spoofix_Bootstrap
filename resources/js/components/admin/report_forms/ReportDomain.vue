@@ -26,6 +26,7 @@
             <h3 class="card-title">
               <i class="fas fa-edit"></i>
               Domain to safeguard: {{ domain.name }}
+              {{ form }}
             </h3>
           </div>
           <div class="card-body">
@@ -56,7 +57,8 @@
                     <div class="card-body">
                       <div class="tab-content" id="custom-tabs-two-tabContent">
                         <div class="tab-pane fade" id="custom-tabs-two-form" role="tabpanel" aria-labelledby="custom-tabs-two-form-tab">
-                          <p>Guide to Report url to {{reporting_organization.name}}:</p>
+                          <div v-if="reporting_organization.form_url">
+                            <p>Guide to Report url to {{reporting_organization.name}}:</p>
                           <ol>
                             <li>Visit the <a type="button" :href="reporting_organization.form_url" v-if="reporting_organization.form_url" target="_blank">{{reporting_organization.name}} Report Form</a>.</li>
                             <li>Fill out the form with the following details:</li>
@@ -79,9 +81,43 @@
                             I would like to report the website {{ spoof_domain.name }} as a {{report_form.abuse_type}} site. This website is attempting to deceive users by imitating legitimate websites and may pose a threat to their security and privacy. Please investigate and take appropriate action.
                           </div>
                           <button class="btn btn-warning rounded-button" @click.prevent="showModal" v-if="reporting_organization.form_url"> Confirm Report</button>
+                          </div>
+                          <h3 v-else>This organization doesn't have a form url to report to</h3>
                         </div>
-                        <div class="tab-pane fade active show" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
-                          email template area
+                        <div class="tab-pane fade active show m-0 p-0" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
+                          <div class="card card-primary" v-if="reporting_organization.email">
+                          <div class="card-header bg-black">
+                            <span class="d-block mx-auto text-warning font-weight-bold" style="font-size: 40px;">Spoo<span style="color: white;">fix</span></span>
+                          </div>
+                          <!-- /.card-header -->
+                          <!-- form start -->
+                          <form @submit.prevent="reportDomain('Email')">
+                            <div class="card-body">
+                              <p>Dear {{reporting_organization.name}},</p>
+                              <p>I trust this email finds you well.</p>
+                              <p>We are writing to formally report a spoofing incident involving <strong>{{spoof_domain.name}}</strong>, which we have detected on <strong>spoofix.com</strong>. This unauthorized usage poses a significant security risk and undermines the integrity of our online presence.</p>
+                              <p>Attached are screenshots documenting the spoofing activity for your immediate review and action. We kindly request your prompt investigation and resolution of this matter to ensure the safety of our online assets and users.</p>
+                              <p>Your swift attention to this issue is greatly appreciated.</p>
+                              <p>Thank you.</p>
+                              <p>Best regards,
+                                <br>{{user.name}}, Support,
+                                <br>support@spoofix.com</p>                            
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <input type="file" class="form-control" id="fileInput" ref="fileInput" @change="handleFileChange" multiple name="media[]">
+                                </div>
+                                <div class="col-md-8">
+                                  <button type="submit" class="btn btn-warning rounded-button float-right">Report</button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                          <h3 v-else>This organization doesn't have an email to report to</h3>
                         </div>
                       </div>
                     </div>
@@ -124,7 +160,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watchEffect } from 'vue';
 import axios from 'axios';
 import { useRoute } from 'vue-router';
 
@@ -141,6 +177,15 @@ const reporting_organizations = ref([]);
 const copyStatus = ref(false); // Variable to track copy status
 const show_modal = ref(false)
 const domain_reports = ref([]);
+const user = JSON.parse(localStorage.getItem('user'));
+const form = ref(
+  {
+    reporting_org_id: null,
+    report_form_id: null,
+    reporting_mode: '', //either Form or Email
+    media: [], // Added for file attachment
+  }
+);
 
 
 // Function to load data
@@ -159,11 +204,18 @@ const loadData = async () => {
     // Fetch reporting organization data
     const reportorgres = await axios.get(`/api/reporting_organizations/1`);
     reporting_organization.value = reportorgres.data.data.reporting_organization; // Corrected property name
+
+    
   } catch (error) {
     console.error('Error loading data:', error);
   }
 };
 
+// Watch for changes in reporting_organization and report_form and update form values accordingly
+watchEffect(() => {
+  form.value.reporting_org_id = reporting_organization.value.id;
+  form.value.report_form_id = report_form.value.id;
+});
 
 const selectOrganization = (org) =>{
   reporting_organization.value = org;
@@ -189,13 +241,40 @@ const closeModal = () =>{
   show_modal.value = false;
 };
 
-const reportDomain = async(mode) => {
-  await axios.post(`/api/domain_reports`, {
-    'reporting_org_id': reporting_organization.value.id,
-    'report_form_id' : report_form.value.id,
-    'reporting_mode': mode, //either Form or Email
-  });
+const handleFileChange = (e) => {
+  form.value.media = []; // Clear the media array before appending new files
+  const files = e.target.files;
+  for (let i = 0; i < files.length; i++) {
+    form.value.media.push(files[i]);
+  }
+};
 
+const reportDomain = async(mode) => {
+  form.value.reporting_mode = mode
+
+  const formData = new FormData();
+
+    // Append form fields
+    for (const key in form.value) {
+      if (Array.isArray(form.value[key])) {
+        for (let i = 0; i < form.value[key].length; i++) {
+          formData.append(key + '[]', form.value[key][i]);
+        }
+      } else {
+        formData.append(key, form.value[key]);
+      }
+    }
+
+    // Append attachments
+    for (let i = 0; i < form.value.media.length; i++) {
+      formData.append('media[]', form.value.media[i]);
+    }
+
+  await axios.post(`/api/domain_reports`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   loadData();
   show_modal.value = false
   form.value.name = ''
@@ -211,10 +290,5 @@ function reportOrgExistsInDomainReports(id, dataArray) {
   // Using Array.some() method
   return dataArray.some(item => item.reporting_org_id === id);
 }
-
-// // Check if ID 2 exists in the array
-// const idExists = isIdExists(2, data);
-// console.log(idExists); // Output: true
-
 
 </script>
