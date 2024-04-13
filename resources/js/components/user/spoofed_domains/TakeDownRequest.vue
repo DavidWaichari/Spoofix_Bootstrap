@@ -59,7 +59,7 @@
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-4 col-form-label">Abuse Type *</label>
                     <div class="col-sm-8">
-                      <select class="form-control" v-model="form.abuse_type" name="abuse_type">
+                      <select class="form-control" v-model="form.abuse_type" name="abuse_type" @change="abuseTypeDetails">
                         <option value="">...Choose abuse type...</option>
                         <option value="Spoofing">Spoofing</option>
                         <option value="Phishing">Phishing</option>
@@ -113,8 +113,8 @@
               <!-- /.card-header -->
               <div class="card-body bg-warning">
                 <div class="callout callout-success">
-                  <h5>I am a success callout!</h5>
-                  <p>This is a green callout.</p>
+                  <h5>{{abuseDetails.title}}</h5>
+                  <p>{{abuseDetails.description}}</p>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -145,6 +145,11 @@ const form = ref({
   media: [], // Added for file attachment
 });
 
+const abuseDetails = ref({
+  'title': '',
+  'description':''
+});
+
 const domains = ref([]);
 
 onMounted(async () => {
@@ -164,9 +169,21 @@ const handleFileChange = (e) => {
     form.value.media.push(files[i]);
   }
 };
-
+const abuseTypeDetails = () =>{
+  if (form.value.abuse_type === "Phishing") {
+    abuseDetails.value.title = "Phishing";
+    abuseDetails.value.description = "Phishing is a type of cyber attack in which attackers attempt to trick individuals into revealing sensitive information, such as login credentials or personal details, by posing as a trustworthy entity. This is often done through deceptive emails, messages, or websites that mimic legitimate sources to deceive the target into providing confidential information.";
+  }else if(form.value.abuse_type === "Spoofing"){
+    abuseDetails.value.title = "Spoofing";
+    abuseDetails.value.description = "Spoofing refers to the act of deceiving or tricking someone or something by falsifying information or pretending to be someone or something else. In the context of computer security, spoofing commonly involves manipulating data, IP addresses, or electronic communications to appear as though they originate from a trustworthy source.";
+  }else{
+    abuseDetails.value.title = '';
+    abuseDetails.value.description = '';
+  }
+};
 const submitForm = async () => {
   try {
+    abuseDetails.value.title = "Phishing"
     const formData = new FormData();
 
     // Append form fields
