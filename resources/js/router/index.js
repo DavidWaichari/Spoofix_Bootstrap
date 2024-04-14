@@ -34,6 +34,8 @@ import AdminDashboard from '../components/admin/Dashboard.vue';
 import TakeDownRequests from '../components/admin/spoofed_domains/TakeDownRequests.vue';
 import ReportDomain from '../components/admin/report_forms/ReportDomain.vue';
 import AdminCompleted from '../components/admin/Completed.vue';
+import AdminInProgress from '../components/admin/InProgress.vue';
+
 
 
 
@@ -170,6 +172,10 @@ const routes = [
         {
           path: 'completed',
           component: AdminCompleted,
+        },
+        {
+          path: 'in_progress',
+          component: AdminInProgress,
         },
         {
           path: 'report_form/:report_id',

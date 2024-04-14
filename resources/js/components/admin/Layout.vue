@@ -127,7 +127,7 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink to="/user/in_progress" class="nav-link" active-class="active-nav-link">
+                <RouterLink to="/admin/in_progress" class="nav-link" active-class="active-nav-link">
                   <i class="nav-icon fas fa-spinner"></i>
                   <p class="text-lg">In Progress</p>
                 </RouterLink>
