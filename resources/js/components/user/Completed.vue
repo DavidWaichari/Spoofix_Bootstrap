@@ -76,7 +76,7 @@
       const loading = ref(true);
       
       const loadData = async () =>{
-        const response = await axios.get(`/api/report_forms/user_completed`);
+        const response = await axios.get(`/api/report_forms/user/completed`);
         items.value = response.data.data.user_completed_report_forms;
         loading.value = false;
         // console.log(response)

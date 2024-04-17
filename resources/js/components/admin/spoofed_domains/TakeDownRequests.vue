@@ -88,7 +88,9 @@
 
     const markSafe = async (item) =>{
       await axios.post(`/api/report_forms/${item.id}/mark_safe`);
-      loadData();
+
+      router.push('/admin/completed')
+      // loadData();
     }
 
     const reportDomain = (item) =>{
