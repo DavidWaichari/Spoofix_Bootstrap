@@ -184,6 +184,13 @@ const routes = [
         
       ],
   },
+  // Wildcard route to catch all undefined routes and redirect to /page_not_found
+  {
+    path: '/:catchAll(.*)',
+    redirect: () => {
+      window.location.href = '/page_not_found';
+    }
+  }
 ];
 
 const router = createRouter({

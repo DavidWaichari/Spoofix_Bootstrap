@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\LandingPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,17 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingPageController::class, 'index']);
+Route::get('/about', [LandingPageController::class, 'about']);
+Route::get('/services', [LandingPageController::class, 'services']);
+Route::get('/contacts', [LandingPageController::class, 'contacts']);
+Route::get('/page_not_found', [LandingPageController::class, 'pageNotFound']);
+Route::get('/services/{name}', [LandingPageController::class, 'serviceDetails']);
 
 
 Route::get('/{any}', function () {
