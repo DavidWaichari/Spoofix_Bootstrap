@@ -13,9 +13,9 @@
             </div>
             <div class="col-lg-6">
                 <div class="banner-content">
-                    <h2 class="heading wow fadeInUp" data-wow-delay=".2s">Report and <span>combat</span> spoofing sites today</h2>
-                    <p class="wow fadeInUp" data-wow-delay=".4s">Nam libero tempore, cum soluta nobis eligendi optio cumque nihil impedit minus quod maxime placeat facere possimus quo assumenda omnis</p>
-                    <a href="contact.html" class="btn wow fadeInUp" data-wow-delay=".6s">
+                    <h2 class="heading wow fadeInUp" data-wow-delay=".2s">Report and <span>combat</span> spoofing sites today!</h2>
+                    <p class="wow fadeInUp" data-wow-delay=".4s">Identify different spoofing sites  and report them to ensure the safety of your organiztion’s website. </p>
+                    <a href="/register" class="btn wow fadeInUp" data-wow-delay=".6s">
                         <span class="text">Create an account</span>
                         <span class="shape"></span>
                     </a>
@@ -136,7 +136,7 @@
                 </div>
             </div>
             <div class="services-explore-btn text-center">
-                <a href="services.html" class="btn">
+                <a href="/services" class="btn">
                     <span class="text">Explore all</span>
                     <span class="shape"></span>
                 </a>

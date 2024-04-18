@@ -109,9 +109,7 @@ const closeModal = () =>{
         { text: "Name", value: "name", sortable: true },
         { text: "Status", value: "status" , sortable: true },
         { text: "Registered", value: "is_registered" , sortable: true },
-        { text: "Spoof Status", value: "spoof_status" , sortable: true },
-        { text: "Scan Status", value: "current_scan_status" , sortable: true },
-        { text: "Progress Status", value: "progress_status", sortable: true },
+        { text: "Is active", value: "is_active" , sortable: true },
         { text: "Operation", value: "operation"},
       ];
       const items:Item[] = ref([]);

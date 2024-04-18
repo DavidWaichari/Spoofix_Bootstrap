@@ -33,17 +33,6 @@ onMounted(() => {
             <div class="card" style="background-color: #fffae6;">
               <div class="card-header">
                 <p class="w-100 m-1">
-                  Internet Service Provider
-
-                </p>
-                <p class="w-100 m-1">     
-                  {{domain_page_statistics.internet_service_provider}}
-                </p>
-              </div>
-            </div>
-            <div class="card" style="background-color: #fffae6;">
-              <div class="card-header">
-                <p class="w-100 m-1">
                   Secure Sockets Layer
                 </p>
                 <p class="w-100 m-1">
@@ -58,16 +47,6 @@ onMounted(() => {
                 </p>
                 <p class="w-100 m-1">
                   {{domain_page_statistics.server_os}}
-                </p>
-              </div>
-            </div>
-            <div class="card" style="background-color: #fffae6;">
-              <div class="card-header">
-                <p class="w-100 m-1">
-                  Organization
-                </p>
-                <p class="w-100 m-1">
-                  {{domain_page_statistics.organization}}
                 </p>
               </div>
             </div>

@@ -58,27 +58,14 @@
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
                                         <ul class="navigation">
-                                            <li class="active menu-item-has-children"><a href="#">Home</a>
-                                                <ul class="sub-menu">
-                                                    <li class="active"><a href="index.html">Home One</a></li>
-                                                    <li><a href="index-2.html">Home Two</a></li>
-                                                    <li><a href="index-3.html">Home Three</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="/">Home</a></li>
                                             <li><a href="/about">About</a></li>
                                             <li><a href="/services">Services</a></li>
                                             <li><a href="/contacts">contacts</a></li>
+                                            <li>
+                                            <a href="/login" style="border-radius: 50px! important; height:50% !important">Login</a>
+                                            </li>
                                         </ul>
-                                    </div>
-                                    <div class="header-social">
-                                        <ul>
-                                            <li><a href="#"><i class="flaticon-facebook"></i></a></li>
-                                            <li><a href="#"><i class="flaticon-twitter"></i></a></li>
-                                            <li><a href="#"><i class="flaticon-linkedin"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="offcanvas-btn">
-                                        <a href="#"><img src="/landing-page/assets/img/icons/dots.png" alt="Icon"></a>
                                     </div>
                                 </nav>
                             </div>

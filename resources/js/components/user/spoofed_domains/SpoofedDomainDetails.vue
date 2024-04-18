@@ -12,7 +12,13 @@ const route = useRoute();
 const router = useRouter();
 
 const spoof_domain = ref({})
-const domain_risk_rating = ref({})
+const domain_risk_rating = ref({
+  'webflow_rating':'',
+  'domain_rating':'',
+  'interface_rating':'',
+  'overall_rating':'',
+  'age':'',
+})
 
 const domain_id = route.params.id;
 const spoof_domain_id = route.params.spoof_id;
@@ -23,8 +29,9 @@ const loadData = async () =>{
       spoof_domain.value = response.data.data.spoofed_domain
 
       const response2 = await axios.get(`/api/spoofed_domains_details/${spoof_domain_id}/risk_ratings`);
-        
-      domain_risk_rating.value = response2.data.data.domain_risk_rating
+      if (response2.data.data.domain_risk_rating) {
+        domain_risk_rating.value = response2.data.data.domain_risk_rating
+      }
         
 };
 
