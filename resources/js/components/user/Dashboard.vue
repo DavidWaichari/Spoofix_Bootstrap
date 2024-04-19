@@ -21,19 +21,6 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-4">
-            <div id="component" class="container-fluid py-3">
-            <div class="px-1 py-1 bg-warning rounded-4 justify-content-center align-items-center">
-                <p class="text-black fs-6 fw-semibold font-family-Poppins col-8 m-0 px-3 py-2">
-                Sign Up
-                </p>
-            </div>
-        </div>
-          </div>
-          <div class="col-md-4"></div>
-          <div class="col-md-4"></div>
-        </div>
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

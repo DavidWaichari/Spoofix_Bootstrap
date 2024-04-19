@@ -121,6 +121,12 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
+                <RouterLink to="/user/social_media_accounts" class="nav-link" active-class="active-nav-link">
+                  <i class="nav-icon fas fa-list"></i>
+                  <p class="text-lg">Social Media</p>
+                </RouterLink>
+              </li>
+              <li class="nav-item">
                 <RouterLink to="/user/report_form" class="nav-link" active-class="active-nav-link">
                   <i class="nav-icon fas fa-bullhorn"></i>
                   <p class="text-lg">Report Form</p>

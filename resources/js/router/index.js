@@ -27,6 +27,7 @@ import DomainScreenshot from '../components/user/spoofed_domains/DomainScreensho
 import HttpRedirects from '../components/user/spoofed_domains/HttpRedirects.vue';
 import RiskRating from '../components/user/spoofed_domains/RiskRating.vue';
 import TakeDownRequest from '../components/user/spoofed_domains/TakeDownRequest.vue';
+import SocialMedia from '../components/user/social_media/SocialMediaList.vue';
 
 // Admin Routes
 import AdminLayout from '../components/admin/Layout.vue';
@@ -122,6 +123,10 @@ const routes = [
         {
           path: 'completed',
           component: Completed,
+        },
+        {
+          path: 'social_media_accounts',
+          component: SocialMedia,
         },
         {
           path: 'mailbox',
