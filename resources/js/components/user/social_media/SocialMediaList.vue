@@ -53,7 +53,6 @@
     <div class="modal" id="modal-warning" style="display: block;" v-if="show_modal">
       <div class="modal-dialog">
         <div class="modal-content">
-          {{ form }}
           <form  @submit.prevent="addAccount">
             <div class="modal-header bg-black">
               <h4 class="modal-title text-warning">Add Account</h4>
@@ -63,19 +62,31 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Name" name="name" v-model="form.name">
+                  <input type="text" class="form-control" placeholder="Name" name="name" v-model="form.name" required>
                 </div>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Account type" name="account_type" v-model="form.account_type">
+                  <select class="form-control" name="account_type" v-model="form.account_type" required>
+                    <option value="">Account type</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Twitter">Twitter</option>
+                    <option value="Linkedin">Linkedin</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Youtube">Youtube</option>
+                </select>
                 </div>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Account details" name="account_details" v-model="form.account_details">
+                    <select class="form-control" name="account_details" v-model="form.account_details" required>
+                      <option value="">Account details</option>
+                      <option value="Page">Page</option>
+                      <option value="Personal">Personal</option>
+                  </select>
                 </div>
                 <div class="input-group mb-3">
-                  <input type="date" class="form-control" placeholder="Date opened" name="date_opened" v-model="form.date_opened">
-                </div>
+                  <label for="date_opened" class="input-group-text">Date opened</label>
+                  <input type="date" id="date_opened" class="form-control" name="date_opened" v-model="form.date_opened" required>
+              </div>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Link to account" name="link" v-model="form.link">
+                  <input type="text" class="form-control" placeholder="Link to account" name="link" v-model="form.link" required>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
