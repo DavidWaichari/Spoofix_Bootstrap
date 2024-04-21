@@ -36,6 +36,16 @@ import TakeDownRequests from '../components/admin/spoofed_domains/TakeDownReques
 import ReportDomain from '../components/admin/report_forms/ReportDomain.vue';
 import AdminCompleted from '../components/admin/Completed.vue';
 import AdminInProgress from '../components/admin/InProgress.vue';
+import AdminDomainsLayout from '../components/admin/domains/AdminDomainsLayout.vue';
+import DomainsList from '../components/admin/domains/DomainsList.vue';
+import AdminSocialMediaLayout from '../components/admin/social_media/SocialMediaLayout.vue';
+import ActiveSocialMediaAccounts from '../components/admin/social_media/Active.vue';
+import RequestedSocialMediaAccounts from '../components/admin/social_media/Requested.vue';
+
+
+
+
+
 
 
 
@@ -69,7 +79,6 @@ const routes = [
           children:[
             {
               path:'',
-              name:'Domains',
               component:UserDomains
             },
             {
@@ -186,16 +195,73 @@ const routes = [
           path: 'report_form/:report_id',
           component: ReportDomain,
         },
+
+        {
+          path: 'domains',
+          component: AdminDomainsLayout,
+          children:[
+            {
+              path:'',
+              component:DomainsList
+            },
+            {
+              path: ':id/spoofed_domains',
+              component: SpoofedDomains,
+            },
+            {
+              path: ':id/spoofed_domains/:spoof_id/details',
+              component: SpoofedDomainDetails,
+              children:[
+                {
+                  path:'scan_details',
+                  component: ScanDetails
+                },
+                {
+                  path:'page_statistics',
+                  component: PageStatistics
+                },
+                {
+                  path:'domain_details',
+                  component: DomainDetails
+                },
+                {
+                  path:'location',
+                  component: DomainLocation
+                },
+                {
+                  path:'screenshot',
+                  component: DomainScreenshot
+                },
+                {
+                  path:'http_redirects',
+                  component: HttpRedirects
+                },
+                {
+                  path:'risk_rating',
+                  component: RiskRating
+                }
+              ]
+            },
+            {
+              path: ':id/spoofed_domains/:spoof_id/take_down_request',
+              component: TakeDownRequest,
+            },
+          ]
+        },
+        {
+          path:'social_media_accounts',
+          component:AdminSocialMediaLayout,
+        }
         
       ],
   },
   // Wildcard route to catch all undefined routes and redirect to /page_not_found
-  {
-    path: '/:catchAll(.*)',
-    redirect: () => {
-      window.location.href = '/page_not_found';
-    }
-  }
+  // {
+  //   path: '/:catchAll(.*)',
+  //   redirect: () => {
+  //     window.location.href = '/page_not_found';
+  //   }
+  // }
 ];
 
 const router = createRouter({

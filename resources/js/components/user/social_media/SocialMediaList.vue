@@ -28,25 +28,26 @@
 <section class="content">
       <div class="container-fluid">
         <EasyDataTable
-          show-index
-          buttons-pagination
-          :headers="headers"
-          :items="items"
-          :loading="loading"
-          :theme-color="'#42b883'"
-          :rows-items="[10, 25, 50,100,500,1000]"
-          :rows-per-page="5"
-          table-class-name="customize-table"
-        >
-          <template #loading>
-            <h1>Loading...</h1>
-          </template>
-          <template #item-action="item">
-            <div class="action-wrapper">
-              <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</button>
-            </div>
-          </template>
-        </EasyDataTable>
+            show-index
+            buttons-pagination
+            :headers="headers"
+            :items="items"
+            :loading="loading"
+            :theme-color="'#42b883'"
+            :rows-items="[10, 25, 50,100,500,1000]"
+            :rows-per-page="5"
+            table-class-name="customize-table"
+          >
+            <template #loading>
+              <h1>Loading...</h1>
+            </template>
+            <template #item-action="item">
+              <div class="action-wrapper">
+                <a  target="_blank" :href="item.link" type="button" class="btn btn-warning btn-sm  rounded-button mr-2" >Visit Account</a>
+                <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</button>
+              </div>
+            </template>
+          </EasyDataTable>
       </div>
     </section>
     <!-- Modal -->
