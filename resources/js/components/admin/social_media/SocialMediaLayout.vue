@@ -54,22 +54,22 @@
                      <RequestedAccounts></RequestedAccounts>
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-one-all" role="tabpanel" aria-labelledby="custom-tabs-one-all-tab">
-                     Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                     <AllAccounts></AllAccounts>
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-one-active" role="tabpanel" aria-labelledby="custom-tabs-one-active-tab">
-                     Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                     <ActiveAccounts></ActiveAccounts>
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-one-inactive" role="tabpanel" aria-labelledby="custom-tabs-one-inactive-tab">
-                     Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                     <InActiveAccounts></InActiveAccounts>
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-one-spoofing" role="tabpanel" aria-labelledby="custom-tabs-one-spoofing-tab">
-                     Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                     <SpoofingAccounts></SpoofingAccounts>
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-one-reported" role="tabpanel" aria-labelledby="custom-tabs-one-reported-tab">
-                     Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                     <ReportedAccounts></ReportedAccounts>
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-one-takendown" role="tabpanel" aria-labelledby="custom-tabs-one-takendown-tab">
-                     Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                     <TakenDownAccounts></TakenDownAccounts>
                   </div>
                 </div>
               </div>
@@ -89,6 +89,13 @@ import { RouterLink, RouterView } from 'vue-router';
 import {ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import RequestedAccounts from './Requested.vue';
+import AllAccounts from './All.vue';
+import ActiveAccounts from './Active.vue';
+import InActiveAccounts from './Inactive.vue';
+import SpoofingAccounts from './Spoofing.vue';
+import ReportedAccounts from './Reported.vue';
+import TakenDownAccounts from './TakenDown.vue';
+import Inactive from './Inactive.vue';
 
 
 const route = useRoute();

@@ -127,7 +127,7 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink to="/admin/social_media" class="nav-link" active-class="active-nav-link">
+                <RouterLink to="/admin/social_media_accounts" class="nav-link" active-class="active-nav-link">
                   <i class="nav-icon fas fa-list"></i>
                   <p class="text-lg">Social Media</p>
                 </RouterLink>
