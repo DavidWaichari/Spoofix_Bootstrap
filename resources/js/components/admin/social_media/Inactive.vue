@@ -21,7 +21,7 @@
               <div class="action-wrapper">
                 <a  target="_blank" :href="item.link" type="button" class="btn btn-outline-primary btn-sm  rounded-button mr-2" >Visit Account</a>
                 <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</button>
-                <button type="button" class="btn btn-sm btn-outline-danger  rounded-button mr-2" @click.prevent="approveAccount(item.id)">Approve</button>
+                <button type="button" class="btn btn-sm btn-outline-danger  rounded-button mr-2" @click.prevent="activateAccount(item.id)">Activate</button>
               </div>
             </template>
           </EasyDataTable>
@@ -58,8 +58,8 @@
           // console.log(response)
         };
 
-        const approveAccount = async(id) =>{
-          const response = await axios.post(`/api/social_media_accounts/approve_account`,{
+        const activateAccount = async(id) =>{
+          const response = await axios.post(`/api/social_media_accounts/activate_account`,{
             account_id:id
           });
           loadData()
