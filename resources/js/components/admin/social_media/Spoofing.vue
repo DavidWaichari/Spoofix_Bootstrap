@@ -3,7 +3,14 @@
   <!-- Main content -->
   <section class="content">
         <div class="container-fluid">
-            <h4>Spoofing accounts</h4>
+            <div class="row">
+                <div class="col-md-10">
+                    <h4>Spoofing accounts</h4>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-sm btn-warning rounded-button" @click.prevent="showModal">Add Account</button>
+                </div>
+            </div>
           <EasyDataTable
             show-index
             buttons-pagination
@@ -21,13 +28,70 @@
             <template #item-action="item">
               <div class="action-wrapper">
                 <a  target="_blank" :href="item.link" type="button" class="btn btn-outline-primary btn-sm  rounded-button mr-2" >Visit Account</a>
-                <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</button>
+                <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Report</button>
               </div>
             </template>
           </EasyDataTable>
         </div>
       </section>
       <!-- /.content -->
+    </div>
+
+     <!-- Modal -->
+     <div class="modal" id="modal-warning" style="display: block;" v-if="show_modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form  @submit.prevent="addAccount">
+            <div class="modal-header bg-black">
+              <h4 class="modal-title text-warning">Add Account</h4>
+              <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" @click="closeModal">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                  <select class="form-control" name="account_id" v-model="form.account_id" required>
+                    <option value="">Account to safeguard</option>
+                    <option :value="account.id" v-for="account in social_media_accounts" v-bind="account.id">{{account.name}} | {{ account.account_type }}| {{ account.account_details }}</option>
+                </select>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Name" name="name" v-model="form.name" required>
+                </div>
+                <div class="input-group mb-3">
+                  <select class="form-control" name="account_type" v-model="form.account_type" required>
+                    <option value="">Account type</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Twitter">Twitter</option>
+                    <option value="Linkedin">Linkedin</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Youtube">Youtube</option>
+                </select>
+                </div>
+                <div class="input-group mb-3">
+                    <select class="form-control" name="account_details" v-model="form.account_details" required>
+                      <option value="">Account details</option>
+                      <option value="Page">Page</option>
+                      <option value="Personal">Personal</option>
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <label for="date_opened" class="input-group-text">Date opened</label>
+                  <input type="date" id="date_opened" class="form-control" name="date_opened" v-model="form.date_opened" required>
+              </div>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Link to account" name="link" v-model="form.link" required>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn  btn-warning rounded-button" @click="closeModal">Close</button>
+              <button type="submit" class="btn btn-warning rounded-button" >Submit</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
     </div>
   </template>
   
@@ -39,6 +103,37 @@
   
     const route = useRoute();
     const router = useRouter();
+
+    const show_modal = ref(false)
+    const social_media_accounts = ref([])
+
+    const form = ref({
+    account_id:'',
+    name: '',
+    account_type:'',
+    account_details:'',
+    date_opened:'',
+    link:''
+    });
+    const addAccount = async() => {
+    await axios.post(`/api/social_media_spoofing_accounts`, form.value);
+    loadData();
+    show_modal.value = false;
+    form.value.account_id = '';
+    form.value.name = '';
+    form.value.account_type = '';
+    form.value.account_details = '';
+    form.value.date_opened = '';
+    form.value.link = '';
+    };
+    const showModal = () =>{
+    show_modal.value = true;
+    };
+
+const closeModal = () =>{
+  show_modal.value = false;
+};
+
         const headers: Header[] = [
           { text: "Name", value: "name", sortable: true },
           { text: "Account type", value: "account_type" , sortable: true },
@@ -53,7 +148,9 @@
         
         const loadData = async () =>{
           const response = await axios.get(`/api/social_media_spoofing_accounts`);
+          const socialres = await axios.get(`/api/social_media_accounts`);
           items.value = response.data.data.social_media_spoofing_accounts;
+          social_media_accounts.value = socialres.data.data.social_media_accounts;
           loading.value = false;
           // console.log(response)
         };
