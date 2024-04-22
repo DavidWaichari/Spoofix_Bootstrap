@@ -39,8 +39,14 @@ import AdminInProgress from '../components/admin/InProgress.vue';
 import AdminDomainsLayout from '../components/admin/domains/AdminDomainsLayout.vue';
 import DomainsList from '../components/admin/domains/DomainsList.vue';
 import AdminSocialMediaLayout from '../components/admin/social_media/SocialMediaLayout.vue';
-import ActiveSocialMediaAccounts from '../components/admin/social_media/Active.vue';
-import RequestedSocialMediaAccounts from '../components/admin/social_media/Requested.vue';
+import SociaMediaRequestedAccounts from '../components/admin/social_media/Requested.vue';
+import SocialMediaAllAccounts from '../components/admin/social_media/All.vue';
+import SocialMediaActiveAccounts from '../components/admin/social_media/Active.vue';
+import SocialMediaInactiveAccounts from '../components/admin/social_media/Inactive.vue';
+import SocialMediaSpoofingAccounts from '../components/admin/social_media/Spoofing.vue';
+import SocialMediaReportedAccounts from '../components/admin/social_media/Reported.vue';
+import SocialMediaTakenDownAccounts from '../components/admin/social_media/TakenDown.vue';
+import SocialMediaInactive from '../components/admin/social_media/Inactive.vue';
 
 
 
@@ -251,6 +257,33 @@ const routes = [
         {
           path:'social_media_accounts',
           component:AdminSocialMediaLayout,
+          children:[
+            {
+              path:'',
+              redirect: '/admin/social_media_accounts/requested',
+            },
+            {
+              path:'requested',
+              component:SociaMediaRequestedAccounts
+            },
+            {
+              path:'all',
+              component:SocialMediaAllAccounts
+            },
+            {
+              path:'active',
+              component:SocialMediaActiveAccounts
+            },
+            {
+              path:'inactive',
+              component:SocialMediaInactiveAccounts
+            },
+            
+            {
+              path:'spoofing_accounts',
+              component:SocialMediaSpoofingAccounts
+            },
+          ]
         }
         
       ],

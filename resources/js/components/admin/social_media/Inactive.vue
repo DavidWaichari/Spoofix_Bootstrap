@@ -3,6 +3,7 @@
   <!-- Main content -->
   <section class="content">
         <div class="container-fluid">
+          <h4>Inactive accounts</h4>
           <EasyDataTable
             show-index
             buttons-pagination
