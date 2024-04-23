@@ -26,7 +26,7 @@
               </div>
             </template>
           </EasyDataTable>
-        </div>items
+        </div>
       </section>
       <!-- /.content -->
     </div>
