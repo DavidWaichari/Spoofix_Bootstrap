@@ -3,7 +3,11 @@
   <!-- Main content -->
   <section class="content">
         <div class="container-fluid">
-          <h4>Active accounts</h4>
+            <div class="row">
+                <div class="col-md-10">
+                    <h4>In progress spoofing accounts</h4>
+                </div>
+            </div>
           <EasyDataTable
             show-index
             buttons-pagination
@@ -21,14 +25,38 @@
             <template #item-action="item">
               <div class="action-wrapper">
                 <a  target="_blank" :href="item.link" type="button" class="btn btn-outline-primary btn-sm  rounded-button mr-2" >Visit Account</a>
-                <RouterLink :to="`/admin/social_media_accounts/${item.id}/spoofing_accounts`" type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</RouterLink>
-                <button type="button" class="btn btn-sm btn-outline-danger  rounded-button mr-2" @click.prevent="deActivateAccount(item.id)">Deactivate Account</button>
+                <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2"  @click.prevent="showReportModal(item)">Take down</button>
               </div>
             </template>
           </EasyDataTable>
-        </div>items
+        </div>
       </section>
       <!-- /.content -->
+    </div>
+
+     <!-- Modal -->
+    <div class="modal" id="modal-warning" style="display: block;" v-if="show_takedown_modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form  @submit.prevent="takeDownAccount">
+            <div class="modal-header bg-black">
+              <h4 class="modal-title text-warning">Take down account</h4>
+              <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" @click="closeTakeDownModal">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you <strong>{{ selected_account.name }}</strong> has been taken down?</h4>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn  btn-warning rounded-button" @click="closeTakeDownModal">No</button>
+              <button type="submit" class="btn btn-warning rounded-button" >Yes</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
     </div>
   </template>
   
@@ -40,6 +68,29 @@
   
     const route = useRoute();
     const router = useRouter();
+
+    const show_takedown_modal = ref(false);
+    const social_media_accounts = ref([]);
+    const selected_account = ref({});
+
+    
+
+    const showReportModal =  (account) => {
+        selected_account.value = account;
+        show_takedown_modal.value = true;
+    }
+
+    const closeTakeDownModal =  () => {
+        selected_account.value = {};
+        show_takedown_modal.value = false;
+    }
+
+    const takeDownAccount = async() =>{
+        await axios.get(`/api/social_media_spoofing_accounts/${selected_account.value.id}/take_down`);
+        loadData();
+        closeTakeDownModal();
+    }
+
         const headers: Header[] = [
           { text: "Name", value: "name", sortable: true },
           { text: "Account type", value: "account_type" , sortable: true },
@@ -53,18 +104,13 @@
         const loading = ref(true);
         
         const loadData = async () =>{
-          const response = await axios.get(`/api/social_media_accounts/active`);
-          items.value = response.data.data.social_media_accounts;
+          const response = await axios.get(`/api/social_media_spoofing_accounts/inprogress`);
+          const socialres = await axios.get(`/api/social_media_accounts`);
+          items.value = response.data.data.social_media_spoofing_accounts;
+          social_media_accounts.value = socialres.data.data.social_media_accounts;
           loading.value = false;
           // console.log(response)
         };
-
-        const deActivateAccount = async(id) =>{
-          const response = await axios.post(`/api/social_media_accounts/deactivate_account`,{
-            account_id:id
-          });
-          loadData()
-        }
   
         onMounted(() => {
          loadData()

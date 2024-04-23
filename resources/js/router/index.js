@@ -44,9 +44,12 @@ import SocialMediaAllAccounts from '../components/admin/social_media/All.vue';
 import SocialMediaActiveAccounts from '../components/admin/social_media/Active.vue';
 import SocialMediaInactiveAccounts from '../components/admin/social_media/Inactive.vue';
 import SocialMediaSpoofingAccounts from '../components/admin/social_media/Spoofing.vue';
-import SocialMediaReportedAccounts from '../components/admin/social_media/Reported.vue';
 import SocialMediaTakenDownAccounts from '../components/admin/social_media/TakenDown.vue';
 import SocialMediaInactive from '../components/admin/social_media/Inactive.vue';
+import SocialMediaInprogressSpoofingAccounts from '../components/admin/social_media/InProgress.vue';
+import SocialMediaCompletedSpoofingAccounts from '../components/admin/social_media/Completed.vue';
+
+
 
 
 
@@ -280,8 +283,16 @@ const routes = [
             },
             
             {
-              path:'spoofing_accounts',
+              path:':account_id?/spoofing_accounts',
               component:SocialMediaSpoofingAccounts
+            },
+            {
+              path:'inprogress',
+              component:SocialMediaInprogressSpoofingAccounts
+            },
+            {
+              path:'completed',
+              component:SocialMediaCompletedSpoofingAccounts
             },
           ]
         }

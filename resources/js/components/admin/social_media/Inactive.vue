@@ -21,7 +21,7 @@
             <template #item-action="item">
               <div class="action-wrapper">
                 <a  target="_blank" :href="item.link" type="button" class="btn btn-outline-primary btn-sm  rounded-button mr-2" >Visit Account</a>
-                <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</button>
+                <RouterLink :to="`/admin/social_media_accounts/${item.id}/spoofing_accounts`" type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</RouterLink>
                 <button type="button" class="btn btn-sm btn-outline-danger  rounded-button mr-2" @click.prevent="activateAccount(item.id)">Activate</button>
               </div>
             </template>

@@ -3,7 +3,11 @@
   <!-- Main content -->
   <section class="content">
         <div class="container-fluid">
-          <h4>Active accounts</h4>
+            <div class="row">
+                <div class="col-md-10">
+                    <h4>Completed spoofing accounts</h4>
+                </div>
+            </div>
           <EasyDataTable
             show-index
             buttons-pagination
@@ -21,12 +25,10 @@
             <template #item-action="item">
               <div class="action-wrapper">
                 <a  target="_blank" :href="item.link" type="button" class="btn btn-outline-primary btn-sm  rounded-button mr-2" >Visit Account</a>
-                <RouterLink :to="`/admin/social_media_accounts/${item.id}/spoofing_accounts`" type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</RouterLink>
-                <button type="button" class="btn btn-sm btn-outline-danger  rounded-button mr-2" @click.prevent="deActivateAccount(item.id)">Deactivate Account</button>
               </div>
             </template>
           </EasyDataTable>
-        </div>items
+        </div>
       </section>
       <!-- /.content -->
     </div>
@@ -40,6 +42,10 @@
   
     const route = useRoute();
     const router = useRouter();
+
+    
+    const social_media_accounts = ref([]);
+    
         const headers: Header[] = [
           { text: "Name", value: "name", sortable: true },
           { text: "Account type", value: "account_type" , sortable: true },
@@ -53,18 +59,13 @@
         const loading = ref(true);
         
         const loadData = async () =>{
-          const response = await axios.get(`/api/social_media_accounts/active`);
-          items.value = response.data.data.social_media_accounts;
+          const response = await axios.get(`/api/social_media_spoofing_accounts/completed`);
+          const socialres = await axios.get(`/api/social_media_accounts`);
+          items.value = response.data.data.social_media_spoofing_accounts;
+          social_media_accounts.value = socialres.data.data.social_media_accounts;
           loading.value = false;
           // console.log(response)
         };
-
-        const deActivateAccount = async(id) =>{
-          const response = await axios.post(`/api/social_media_accounts/deactivate_account`,{
-            account_id:id
-          });
-          loadData()
-        }
   
         onMounted(() => {
          loadData()

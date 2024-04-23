@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10">
-                    <h4>Spoofing accounts</h4>
+                    <h4>Spoofing accounts for {{ social_media_account.name }} | {{ social_media_account.account_type }}</h4>
                 </div>
                 <div class="col-md-2">
                     <button class="btn btn-sm btn-warning rounded-button" @click.prevent="showModal">Add Account</button>
@@ -16,7 +16,7 @@
             buttons-pagination
             :headers="headers"
             :items="items"
-            :loading="loading"
+            :loading="loading"social_media_account
             :theme-color="'#42b883'"
             :rows-items="[10, 25, 50,100,500,1000]"
             :rows-per-page="5"
@@ -28,7 +28,7 @@
             <template #item-action="item">
               <div class="action-wrapper">
                 <a  target="_blank" :href="item.link" type="button" class="btn btn-outline-primary btn-sm  rounded-button mr-2" >Visit Account</a>
-                <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Report</button>
+                <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2"  @click.prevent="showReportModal(item)">Report</button>
               </div>
             </template>
           </EasyDataTable>
@@ -86,6 +86,29 @@
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn  btn-warning rounded-button" @click="closeModal">Close</button>
               <button type="submit" class="btn btn-warning rounded-button" >Submit</button>
+            </div>social_media_account
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <div class="modal" id="modal-warning" style="display: block;" v-if="show_report_modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form  @submit.prevent="reportAccount">
+            <div class="modal-header bg-black">
+              <h4 class="modal-title text-warning">Report Account</h4>
+              <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" @click="closeReportModal">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you have reported <strong>{{ selected_account.name }}</strong> as a spoofing account?</h4>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn  btn-warning rounded-button" @click="closeReportModal">No</button>
+              <button type="submit" class="btn btn-warning rounded-button" >Yes</button>
             </div>
           </form>
         </div>
@@ -104,8 +127,11 @@
     const route = useRoute();
     const router = useRouter();
 
-    const show_modal = ref(false)
-    const social_media_accounts = ref([])
+    const show_modal = ref(false);
+    const show_report_modal = ref(false);
+    const social_media_accounts = ref([]);
+    const selected_account = ref({});
+    const social_media_account = ref({});
 
     const form = ref({
     account_id:'',
@@ -115,6 +141,25 @@
     date_opened:'',
     link:''
     });
+
+    const showReportModal =  (account) => {
+        selected_account.value = account;
+        show_report_modal.value = true;
+    }
+
+    const closeReportModal =  () => {
+        selected_account.value = {};
+        show_report_modal.value = false;
+    }
+
+    const reportAccount = async() =>{
+        await axios.get(`/api/social_media_spoofing_accounts/${selected_account.value.id}/report`);
+        loadData();
+        closeReportModal();
+    }
+
+
+
     const addAccount = async() => {
     await axios.post(`/api/social_media_spoofing_accounts`, form.value);
     loadData();
@@ -147,15 +192,24 @@ const closeModal = () =>{
         const loading = ref(true);
         
         const loadData = async () =>{
-          const response = await axios.get(`/api/social_media_spoofing_accounts`);
+            if (route.params.account_id !== '') {
+                const response = await axios.get(`/api/social_media_accounts/${route.params.account_id}/spoofing_accounts`);
+                items.value = response.data.data.social_media_accounts;
+                social_media_account.value = response.data.data.social_media_account;
+            }else{
+                const response = await axios.get(`/api/social_media_spoofing_accounts`);
+                items.value = response.data.data.social_media_spoofing_accounts;
+                social_media_account.value = {"name": "All accounts", "account_type": ""};
+            }
           const socialres = await axios.get(`/api/social_media_accounts`);
-          items.value = response.data.data.social_media_spoofing_accounts;
+          
           social_media_accounts.value = socialres.data.data.social_media_accounts;
           loading.value = false;
           // console.log(response)
         };
   
         onMounted(() => {
+    
          loadData()
       });
     </script>

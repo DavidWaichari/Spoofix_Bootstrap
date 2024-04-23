@@ -20,7 +20,7 @@
             <template #item-action="item">
               <div class="action-wrapper">
                 <a  target="_blank" :href="item.link" type="button" class="btn btn-outline-primary btn-sm  rounded-button mr-2" >Visit Account</a>
-                <button type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</button>
+                <RouterLink :to="`/admin/social_media_accounts/${item.id}/spoofing_accounts`" type="button" class="btn btn-sm btn-outline-warning  rounded-button mr-2" >Spoofing accounts</RouterLink>
                 <button type="button" class="btn btn-sm btn-outline-danger  rounded-button mr-2" @click.prevent="approveAccount(item.id)">Approve</button>
               </div>
             </template>
@@ -35,7 +35,7 @@
     import { defineComponent, ref, reactive, onMounted} from "vue";
     import { Header, Item } from "vue3-easy-data-table";
     import axios from 'axios';
-    import { useRoute, useRouter } from 'vue-router';
+    import { RouterLink, useRoute, useRouter } from 'vue-router';
   
     const route = useRoute();
     const router = useRouter();
